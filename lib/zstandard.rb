@@ -40,10 +40,10 @@ module Zstandard
   # dont forget to free context after usage !!!
 
   def self.deflate(string, level = 6)
-    string = "123456789"* 60000
+    string = "1234567890" * 100 * 1024 * 16
     src = FFI::MemoryPointer.from_string(string)
-    dst = FFI::MemoryPointer.new(dst_capacity = zstd_compress_bound(src.size))
-    error_code_or_size = zstd_compress(dst, dst_capacity, src, src.size, 1)
+    dst = FFI::MemoryPointer.new(dst_capacity = zstd_compress_bound(src.size-1))
+    error_code_or_size = zstd_compress(dst, dst_capacity, src, src.size-1, 1)
 
     if zstd_is_error(error_code_or_size) >= 0
       dst.read_bytes(error_code_or_size)
@@ -56,27 +56,38 @@ module Zstandard
   end
 
   def self.inflate(string)
+    src = FFI::MemoryPointer.from_string(string)
+    zstd_get_frame_params(frame_params = ZstdParameters.new, src, src.size)
+    dst = FFI::MemoryPointer.new(:char, 2 ** frame_params[:windowLog]) # TODO: check value befor allocating buffer
+
+    index = 0
+    capacity = 0
+    buffer = []
+
     dctx = zstd_create_dctx
     zstd_decompress_begin(dctx)
 
-    src = FFI::MemoryPointer.from_string(string)
-    dst1 = FFI::MemoryPointer.new(dst_capacity = 200000)
-    dst2 = FFI::MemoryPointer.new(dst_capacity = 200000)
-
-    index = 0
-    buffer = []
-    
     while (src_size = zstd_next_src_size_to_deompress(dctx)) != 0
-      result = 0
-      binding.pry
-      # result = zstd_decompress_continue(dctx, dst, dst_capacity, src + index, src_size)
+      result = zstd_decompress_continue(dctx, dst + capacity, (dst + capacity).size, src + index, src_size)
       if zstd_is_error(result) > 0
-        binding.pry
+        #binding.pry
+        #w = 0
       elsif result > 0
-        # buffer << dst.read_bytes(src_size)
-        binding.pry
+        buffer << (dst + capacity).read_bytes(result)
+        capacity += result
+        if (dst + capacity).size == 0
+          #binding.pry
+          capacity = 0
+        end
+      else
+        #binding.pry
+        #w = 0
+        #old_dst.free if old_dst
+        #old_dst = dst
+        #dst.free
+        #dst = FFI::MemoryPointer.new(:char, dst_capacity = 1024 * 512)
       end
-        
+      
       index += src_size
     end
 
