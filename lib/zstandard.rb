@@ -40,7 +40,7 @@ module Zstandard
   # dont forget to free context after usage !!!
 
   def self.deflate(string, level = 6)
-    string = "a"*256 + "b"*1024
+    string = "123456789"* 60000
     src = FFI::MemoryPointer.from_string(string)
     dst = FFI::MemoryPointer.new(dst_capacity = zstd_compress_bound(src.size))
     error_code_or_size = zstd_compress(dst, dst_capacity, src, src.size, 1)
@@ -60,19 +60,27 @@ module Zstandard
     zstd_decompress_begin(dctx)
 
     src = FFI::MemoryPointer.from_string(string)
-    dst = FFI::MemoryPointer.new(dst_capacity = 1024)
+    dst1 = FFI::MemoryPointer.new(dst_capacity = 200000)
+    dst2 = FFI::MemoryPointer.new(dst_capacity = 200000)
 
     index = 0
-
+    buffer = []
+    
     while (src_size = zstd_next_src_size_to_deompress(dctx)) != 0
-      result = zstd_decompress_continue(dctx, dst, dst_capacity, src + index, src_size)
+      result = 0
+      binding.pry
+      # result = zstd_decompress_continue(dctx, dst, dst_capacity, src + index, src_size)
       if zstd_is_error(result) > 0
         binding.pry
       elsif result > 0
+        # buffer << dst.read_bytes(src_size)
         binding.pry
       end
         
       index += src_size
     end
+
+    result = buffer.join
+    binding.pry
   end
 end
