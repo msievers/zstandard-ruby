@@ -1,7 +1,9 @@
 require "benchmark/ips"
 require 'securerandom'
 require "ffi"
-require "zstandard/version"
+
+require_relative "./zstandard/ffi_bindings"
+require_relative "./zstandard/version"
 
 module Zstandard
   extend FFI::Library
@@ -76,6 +78,7 @@ module Zstandard
   def self.inflate(string = compressed_data)
     src = FFI::MemoryPointer.from_string(string)
     zstd_get_frame_params(frame_params = ZstdParameters.new, src, src.size)
+    binding.pry
     dst = FFI::MemoryPointer.new(:char, 2 ** frame_params[:windowLog]) # TODO: check value befor allocating buffer
 
     index = 0
@@ -102,13 +105,15 @@ module Zstandard
     src.free
     dst.free
 
-    result = buffer.join
+    buffer.join
   end
 
   def self.benchmark
     string = SecureRandom.hex(1024*1024*16)
     zlib_compressed_data = Zlib.deflate(string)
     zstd_compressed_data = deflate(string)
+
+    inflate(string)
 
     Benchmark.ips do |x|
       # Configure the number of seconds used during
