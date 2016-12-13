@@ -10,18 +10,18 @@ module Zstandard
     if zstd_version_number < 600
       enum :ZSTD_strategy, [:ZSTD_fast, :ZSTD_greedy, :ZSTD_lazy, :ZSTD_lazy2, :ZSTD_btlazy2]
 
-			class ZSTD_parameters < FFI::Struct
-				layout(
-					:srcSize,      :uint64,
-					:windowLog,    :uint32,
-					:contentLog,   :uint32,
-					:hashLog,      :uint32,
-					:searchLog,    :uint32,
-					:searchLength, :uint32,
-					:targetLength, :uint32,
-					:strategy,     :ZSTD_strategy
-				)
-			end
+      class ZSTD_parameters < FFI::Struct
+        layout(
+          :srcSize,      :uint64,
+          :windowLog,    :uint32,
+          :contentLog,   :uint32,
+          :hashLog,      :uint32,
+          :searchLog,    :uint32,
+          :searchLength, :uint32,
+          :targetLength, :uint32,
+          :strategy,     :ZSTD_strategy
+        )
+      end
     elsif zstd_version_number < 800
       enum :ZSTD_strategy, [:ZSTD_fast, :ZSTD_greedy, :ZSTD_lazy, :ZSTD_lazy2, :ZSTD_btlazy2, :ZSTD_btopt]
     else
@@ -50,9 +50,8 @@ module Zstandard
 
       class ZSTD_parameters < FFI::Struct
         layout(
-          :cParams, :foo,
+          :cParams, ZSTD_compressionParameters,
           :fParams, ZSTD_frameParams
-
         )
       end
     end
