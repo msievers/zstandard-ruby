@@ -4,6 +4,7 @@ source "https://rubygems.org"
 gemspec
 
 group :development do
+  gem "benchmark-ips"
   gem "bundler"
   gem "rake"
   gem "rubocop", "~> 0.41", require: false
