@@ -3,11 +3,11 @@ require_relative "./zstandard/simple_compressor"
 require_relative "./zstandard/version"
 
 module Zstandard
-  def self.deflate(string, level = 6)
-    SimpleCompressor.call(string: string, level: level)
+  def self.deflate(string, level = 1)
+    SimpleCompressor.call(string, level: level)
   end
 
-  def self.inflate(string = compressed_data)
-    BufferlessStreamingDecompressor.call(string: string)
+  def self.inflate(string)
+    BufferlessStreamingDecompressor.call(string)
   end
 end
