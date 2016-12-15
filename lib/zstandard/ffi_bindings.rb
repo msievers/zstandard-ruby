@@ -3,12 +3,12 @@ require "ffi"
 module Zstandard
   module FFIBindings
     extend FFI::Library
-    ffi_lib "zstd"
+    ffi_lib ENV["ZSTANDARD_LIBRARY_PATH"] || "zstd"
 
     # unsigned ZSTD_versionNumber (void)
     attach_function :zstd_version_number, :ZSTD_versionNumber, [], :uint
 
-    raise Zstandard::LibraryVersionNotSupportedError if zstd_version_number < 400
+    raise Zstandard::LibraryVersionNotSupportedError if zstd_version_number < 500
 
     #
     # Simple api
@@ -19,6 +19,9 @@ module Zstandard
 
     # size_t ZSTD_compressBound(size_t srcSize)
     attach_function :zstd_compress_bound, :ZSTD_compressBound, [:size_t], :size_t
+
+    # size_t ZSTD_decompress(void* dst, size_t dstCapacity, const void* src, size_t compressedSize)
+    attach_function :zstd_decompress, :ZSTD_decompress, [:pointer, :size_t, :pointer, :size_t], :size_t
 
     #
     # Buffer-less streaming decompression
