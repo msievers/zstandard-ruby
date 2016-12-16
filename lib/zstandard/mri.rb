@@ -6,7 +6,7 @@ module Zstandard
 
     def self.sizeof(type)
       Class.new(FFI::Struct) do
-        layout(:member, type)
+        layout(member: type)
       end
       .size
     end
@@ -15,8 +15,8 @@ module Zstandard
 
     class RBasic < FFI::Struct
       layout(
-        :flags, VALUE,
-        :klass, VALUE
+        flags: VALUE,
+        klass: VALUE
       )
     end
 
@@ -24,22 +24,22 @@ module Zstandard
 
     class RString < FFI::Struct
       layout(
-        :basic, RBasic,
-        :as,    Class.new(FFI::Union) do
+        basic: RBasic,
+        as:    Class.new(FFI::Union) do
           layout(
-            :heap, Class.new(FFI::Struct) do
+            heap: Class.new(FFI::Struct) do
               layout(
-                :len, :long,
-                :ptr, :pointer,
-                :aux, Class.new(FFI::Union) do
+                len: :long,
+                ptr: :pointer,
+                aux: Class.new(FFI::Union) do
                   layout(
-                    :capa,   :long,
-                    :shared, VALUE
+                    capa:   :long,
+                    shared: VALUE
                   )
                 end
               )
             end,
-            :ary, [:char, RSTRING_EMBED_LEN_MAX]
+            ary: [:char, RSTRING_EMBED_LEN_MAX]
           )
         end
       )
