@@ -1,4 +1,5 @@
 require_relative "./ffi_bindings"
+require_relative "./parameters"
 
 module Zstandard
   # Internal API layer to abstract different libzstd calling semantics/versions
@@ -7,7 +8,7 @@ module Zstandard
       dst_size = window_size(string)
 
       # The docs propose to check the dst size (windowSize), because it could be manipulated
-      raise "Invalid dst size!" if dst_size <= 0 || dst_size > MAX_STREAMING_DECOMRPESS_BUFFER_SIZE
+      raise "Invalid dst size!" if dst_size <= 0 || dst_size > Parameters::MAX_STREAMING_DECOMRPESS_BUFFER_SIZE
 
       src = FFI::MemoryPointer.from_string(string) # we need the pointer for arithmetics
       dst = FFI::MemoryPointer.new(:char, dst_size)
