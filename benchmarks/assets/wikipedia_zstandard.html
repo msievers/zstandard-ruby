@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Zstandard - Wikipedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Zstandard","wgTitle":"Zstandard","wgCurRevisionId":753453226,"wgRevisionId":753453226,"wgArticleId":51498967,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Pages using deprecated image syntax","Articles to be expanded from September 2016","All articles to be expanded","Articles needing translation from French Wikipedia","Articles needing translation from Russian Wikipedia","All stub articles","Lossless compression algorithms","Free data compression software","C libraries","2016 software","Software using the BSD license","Algorithms and data structures stubs","Computer science stubs"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Zstandard","wgRelevantArticleId":51498967,"wgRequestId":"WFFJDQpAMFMAAENYnOUAAABX","wgIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgFlaggedRevsParams":{"tags":{"status":{"levels":1,"quality":2,"pristine":3}}},"wgStableRevisionId":null,"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"en","wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":false},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"English","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q26737171","wgCentralAuthMobileDomain":false,"wgVisualEditorToolbarScrollOffset":0,"wgEditSubmitButtonLabelPublish":false});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.cite.styles":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0j3lz3q",function($,jQuery,require,module){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["ext.cite.a11y","mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.legacy.wikibits","mediawiki.searchSuggest","ext.gadget.teahouse","ext.gadget.ReferenceTooltips","ext.gadget.watchlist-notice","ext.gadget.DRN-wizard","ext.gadget.charinsert","ext.gadget.refToolbar","ext.gadget.extra-toolbar-buttons","ext.gadget.switcher","ext.gadget.featured-articles-links","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.interface","ext.quicksurveys.init","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=en&amp;modules=ext.cite.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector"/>
+<meta name="generator" content="MediaWiki 1.29.0-wmf.5"/>
+<meta name="referrer" content="origin-when-cross-origin"/>
+<link rel="alternate" href="android-app://org.wikipedia/http/en.m.wikipedia.org/wiki/Zstandard"/>
+<link rel="alternate" type="application/x-wiki" title="Edit this page" href="/w/index.php?title=Zstandard&amp;action=edit"/>
+<link rel="edit" title="Edit this page" href="/w/index.php?title=Zstandard&amp;action=edit"/>
+<link rel="apple-touch-icon" href="/static/apple-touch/wikipedia.png"/>
+<link rel="shortcut icon" href="/static/favicon/wikipedia.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikipedia (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="//en.wikipedia.org/w/api.php?action=rsd"/>
+<link rel="copyright" href="//creativecommons.org/licenses/by-sa/3.0/"/>
+<link rel="canonical" href="https://en.wikipedia.org/wiki/Zstandard"/>
+<link rel="dns-prefetch" href="//login.wikimedia.org"/>
+<link rel="dns-prefetch" href="//meta.wikimedia.org" />
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Zstandard rootpage-Zstandard skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+							<div id="siteNotice"><!-- CentralNotice --></div>
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Zstandard</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From Wikipedia, the free encyclopedia</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><script>function mfTempOpenSection(id){var block=document.getElementById("mf-section-"+id);block.className+=" open-block";block.previousSibling.className+=" open-block";}</script><table class="infobox vevent" style="width:22em">
+<caption class="summary">Zstandard</caption>
+<tr>
+<td colspan="2" style="text-align:center"><a href="/wiki/File:Zstandard_logo.png" class="image"><img alt="Zstandard logo.png" src="//upload.wikimedia.org/wikipedia/en/b/ba/Zstandard_logo.png" width="234" height="226" data-file-width="234" data-file-height="226" /></a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Software_developer" title="Software developer">Original author(s)</a></th>
+<td>Yann Collet</td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Software_developer" title="Software developer">Developer(s)</a></th>
+<td>Yann Collet, Przemysław Skibiński (<a rel="nofollow" class="external text" href="https://github.com/facebook/zstd/graphs/contributors">inikep</a>)</td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Initial release</th>
+<td>January&#160;25,&#160;2015<span style="display:none">&#160;(<span class="bday dtstart published updated">2015-01-25</span>)</span></td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center"></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Software_release_life_cycle" title="Software release life cycle">Stable release</a></th>
+<td>
+<div style="margin:0px;">1.1.1 / November&#160;1, 2016<span class="noprint">; 38 days ago</span><span style="display:none">&#160;(<span class="bday dtstart published updated">2016-11-01</span>)</span></div>
+</td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Source_code_repository" class="mw-redirect" title="Source code repository">Repository</a></th>
+<td><span class="url"><a rel="nofollow" class="external text" href="https://github.com/facebook/zstd">github<wbr />.com<wbr />/facebook<wbr />/zstd</a></span></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Development status</th>
+<td>Active</td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Written in</th>
+<td><a href="/wiki/C_(programming_language)" title="C (programming language)">C</a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Operating_system" title="Operating system">Operating system</a></th>
+<td><a href="/wiki/Cross-platform" title="Cross-platform">Cross-platform</a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Computing_platform" title="Computing platform">Platform</a></th>
+<td>Portable</td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/List_of_software_categories" class="mw-redirect" title="List of software categories">Type</a></th>
+<td><a href="/wiki/Data_compression" title="Data compression">Data compression</a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="/wiki/Software_license" title="Software license">License</a></th>
+<td><a href="/wiki/BSD_License" class="mw-redirect" title="BSD License">BSD License</a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Website</th>
+<td><span class="url"><a rel="nofollow" class="external text" href="http://www.zstd.net">www<wbr />.zstd<wbr />.net</a></span></td>
+</tr>
+</table>
+<p><b>Zstandard</b> (or <b>Zstd</b>) is a <a href="/wiki/Lossless_compression" title="Lossless compression">lossless</a> <a href="/wiki/Data_compression" title="Data compression">data compression</a> algorithm developed by <a href="/w/index.php?title=Yann_Collet&amp;action=edit&amp;redlink=1" class="new" title="Yann Collet (page does not exist)">Yann Collet</a> at <a href="/wiki/Facebook" title="Facebook">Facebook</a>. The name also refers to the reference implementation in <a href="/wiki/C_(programming_language)" title="C (programming language)">C</a>. Version 1 of implementation was released as <a href="/wiki/Free_software" title="Free software">Free software</a> on 31 August 2016.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1">[1]</a></sup><sup id="cite_ref-2" class="reference"><a href="#cite_note-2">[2]</a></sup></p>
+<p></p>
+<div id="toc" class="toc">
+<div id="toctitle">
+<h2>Contents</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Features"><span class="tocnumber">1</span> <span class="toctext">Features</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#License"><span class="tocnumber">2</span> <span class="toctext">License</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#See_also"><span class="tocnumber">3</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#References"><span class="tocnumber">4</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#External_links"><span class="tocnumber">5</span> <span class="toctext">External links</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="Features">Features</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Zstandard&amp;action=edit&amp;section=1" title="Edit section: Features">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Zstandard was designed to give compression comparable to that of <a href="/wiki/DEFLATE" title="DEFLATE">DEFLATE</a> (<a href="/wiki/Zip_(file_format)" title="Zip (file format)">.ZIP</a>, <a href="/wiki/Gzip" title="Gzip">gzip</a>) with higher compression / decompression speeds.</p>
+<p>Zstandard combines use of a dictionary-type algorithm (<a href="/wiki/LZ77" class="mw-redirect" title="LZ77">LZ77</a>) and <a href="/w/index.php?title=Finite_State_Entropy&amp;action=edit&amp;redlink=1" class="new" title="Finite State Entropy (page does not exist)">Finite State Entropy</a> (<a href="/wiki/Asymmetric_Numeral_Systems" title="Asymmetric Numeral Systems">tANS</a>) stage of <a href="/wiki/Entropy_encoding" title="Entropy encoding">entropy coding</a>.</p>
+<h2><span class="mw-headline" id="License">License</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Zstandard&amp;action=edit&amp;section=2" title="Edit section: License">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>The reference implementation is licensed under the <a href="/wiki/BSD_License" class="mw-redirect" title="BSD License">BSD License</a>, published at <a href="/wiki/GitHub" title="GitHub">GitHub</a>. Since version 1.0, it has additional Grant of Patent Rights.<sup id="cite_ref-3" class="reference"><a href="#cite_note-3">[3]</a></sup></p>
+<h2><span class="mw-headline" id="See_also">See also</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Zstandard&amp;action=edit&amp;section=3" title="Edit section: See also">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a href="/wiki/LZ77" class="mw-redirect" title="LZ77">LZ77</a></li>
+<li><a href="/wiki/Asymmetric_Numeral_Systems" title="Asymmetric Numeral Systems">Asymmetric Numeral Systems</a></li>
+<li><a href="/wiki/Brotli" title="Brotli">Brotli</a></li>
+<li><a href="https://fr.wikipedia.org/wiki/LZFSE" class="extiw" title="fr:LZFSE">LZFSE</a> - A similar algorithm by <a href="/wiki/Apple_Inc." title="Apple Inc.">Apple</a> used since iOS 9 and OS X 10.11 and made open-source on 1 June 2016</li>
+</ul>
+<h2><span class="mw-headline" id="References">References</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Zstandard&amp;action=edit&amp;section=4" title="Edit section: References">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-1"><span class="mw-cite-backlink"><b><a href="#cite_ref-1">^</a></b></span> <span class="reference-text">Sergio De Simone, <a rel="nofollow" class="external text" href="https://www.infoq.com/news/2016/09/facebook-zstandard-compression">Facebook Open-Sources New Compression Algorithm Outperforming Zlib</a> / InfoQ, Sep 02, 2016</span></li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text"><cite class="citation news"><a rel="nofollow" class="external text" href="http://www.theregister.co.uk/2016/08/31/facebook_open_source_database/">"Life imitates satire: Facebook touts zlib killer just like Silicon Valley's Pied Piper"</a>. The Register. 2016-08-31<span class="reference-accessdate">. Retrieved <span class="nowrap">2016-09-06</span></span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AZstandard&amp;rft.atitle=Life+imitates+satire%3A+Facebook+touts+zlib+killer+just+like+Silicon+Valley%27s+Pied+Piper&amp;rft.date=2016-08-31&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fwww.theregister.co.uk%2F2016%2F08%2F31%2Ffacebook_open_source_database%2F&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+<li id="cite_note-3"><span class="mw-cite-backlink"><b><a href="#cite_ref-3">^</a></b></span> <span class="reference-text"><a rel="nofollow" class="external text" href="https://github.com/facebook/zstd/blob/dev/PATENTS">zstd/PATENTS</a> "Additional Grant of Patent Rights Version 2", Facebook</span></li>
+</ol>
+</div>
+<h2><span class="mw-headline" id="External_links">External links</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Zstandard&amp;action=edit&amp;section=5" title="Edit section: External links">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><span class="official-website"><span class="url"><a rel="nofollow" class="external text" href="http://www.zstd.net">Official website</a></span></span></li>
+<li><a rel="nofollow" class="external text" href="https://github.com/facebook/zstd">Zstandard repository</a> on GitHub</li>
+<li><a rel="nofollow" class="external autonumber" href="https://code.facebook.com/posts/1658392934479273/smaller-and-faster-data-compression-with-zstandard/">[1]</a> Facebook Announcement - "Smaller and faster data compression with Zstandard"</li>
+<li><a rel="nofollow" class="external text" href="http://facebook.github.io/zstd/">Algorithm details</a> on GitHub</li>
+<li><a rel="nofollow" class="external text" href="https://www.theguardian.com/info/developer-blog/2016/dec/01/discover-new-compression-iinovations-brotli-and-zstandard">The Guardian is using ZStandard instead of zlib</a></li>
+</ul>
+<table class="plainlinks metadata ambox ambox-notice" role="presentation">
+<tr>
+<td class="mbox-image">
+<div style="width:52px"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Translation_to_english_arrow.svg/50px-Translation_to_english_arrow.svg.png" width="50" height="17" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Translation_to_english_arrow.svg/75px-Translation_to_english_arrow.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Translation_to_english_arrow.svg/100px-Translation_to_english_arrow.svg.png 2x" data-file-width="60" data-file-height="20" /></div>
+</td>
+<td class="mbox-text">
+<div class="NavFrame collapsed" style="border:none;">
+<div class="NavHead" style="background:transparent;text-align:center;padding-right: 3em; font-weight: normal; text-align: left"><span class="mbox-text-span">This article <b>may be expanded with text translated from the <a href="https://fr.wikipedia.org/wiki/Zstandard" class="extiw" title="fr:Zstandard">corresponding article</a> in French</b>.  <i><small>(September 2016)</small></i> <small>Click [show] for important translation instructions.</small>&#160;</span></div>
+<div class="NavContent" style="background:transparent;text-align:left;">
+<ul>
+<li><span class="mbox-text-span"><a rel="nofollow" class="external text" href="https://translate.google.com/translate?&amp;u=https%3A%2F%2Ffr.wikipedia.org%2Fwiki%2FZstandard&amp;sl=fr&amp;tl=en&amp;prev=_t&amp;hl=en">View</a> a machine-translated version of the French article.</span></li>
+<li><span class="mbox-text-span">Google's machine translation is a useful starting point for translations, but translators must revise errors as necessary and confirm that the translation is accurate, rather than simply copy-pasting machine-translated text into the English Wikipedia.</span></li>
+<li><span class="mbox-text-span">Do not translate text that appears unreliable or low-quality. If possible, verify the text with references provided in the foreign-language article.</span></li>
+<li><span class="mbox-text-span">After translating, <code>{{Translated|fr|Zstandard}}</code> must be added to the <a href="/wiki/Talk:Zstandard" title="Talk:Zstandard">talk page</a> to ensure <a href="/wiki/Wikipedia:Copying_within_Wikipedia" title="Wikipedia:Copying within Wikipedia">copyright compliance</a>.</span></li>
+<li><span class="mbox-text-span">For more guidance, see <a href="/wiki/Wikipedia:Translation" title="Wikipedia:Translation">Wikipedia:Translation</a>.</span></li>
+</ul>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<table class="plainlinks metadata ambox ambox-notice" role="presentation">
+<tr>
+<td class="mbox-image">
+<div style="width:52px"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Translation_to_english_arrow.svg/50px-Translation_to_english_arrow.svg.png" width="50" height="17" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Translation_to_english_arrow.svg/75px-Translation_to_english_arrow.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Translation_to_english_arrow.svg/100px-Translation_to_english_arrow.svg.png 2x" data-file-width="60" data-file-height="20" /></div>
+</td>
+<td class="mbox-text">
+<div class="NavFrame collapsed" style="border:none;">
+<div class="NavHead" style="background:transparent;text-align:center;padding-right: 3em; font-weight: normal; text-align: left"><span class="mbox-text-span">This article <b>may be expanded with text translated from the <a href="https://ru.wikipedia.org/wiki/Zstandard" class="extiw" title="ru:Zstandard">corresponding article</a> in Russian</b>.  <i><small>(September 2016)</small></i> <small>Click [show] for important translation instructions.</small>&#160;</span></div>
+<div class="NavContent" style="background:transparent;text-align:left;">
+<ul>
+<li><span class="mbox-text-span"><a rel="nofollow" class="external text" href="https://translate.google.com/translate?&amp;u=https%3A%2F%2Fru.wikipedia.org%2Fwiki%2FZstandard&amp;sl=ru&amp;tl=en&amp;prev=_t&amp;hl=en">View</a> a machine-translated version of the Russian article.</span></li>
+<li><span class="mbox-text-span">Google's machine translation is a useful starting point for translations, but translators must revise errors as necessary and confirm that the translation is accurate, rather than simply copy-pasting machine-translated text into the English Wikipedia.</span></li>
+<li><span class="mbox-text-span">Do not translate text that appears unreliable or low-quality. If possible, verify the text with references provided in the foreign-language article.</span></li>
+<li><span class="mbox-text-span">After translating, <code>{{Translated|ru|Zstandard}}</code> must be added to the <a href="/wiki/Talk:Zstandard" title="Talk:Zstandard">talk page</a> to ensure <a href="/wiki/Wikipedia:Copying_within_Wikipedia" title="Wikipedia:Copying within Wikipedia">copyright compliance</a>.</span></li>
+<li><span class="mbox-text-span">For more guidance, see <a href="/wiki/Wikipedia:Translation" title="Wikipedia:Translation">Wikipedia:Translation</a>.</span></li>
+</ul>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<div role="navigation" class="navbox" aria-labelledby="Data_compression_methods" style="padding:3px">
+<table class="nowraplinks hlist collapsible autocollapse navbox-inner" style="border-spacing:0;background:transparent;color:inherit">
+<tr>
+<th scope="col" class="navbox-title" colspan="2">
+<div class="plainlinks hlist navbar mini">
+<ul>
+<li class="nv-view"><a href="/wiki/Template:Compression_methods" title="Template:Compression methods"><abbr title="View this template" style=";;background:none transparent;border:none;">v</abbr></a></li>
+<li class="nv-talk"><a href="/wiki/Template_talk:Compression_methods" title="Template talk:Compression methods"><abbr title="Discuss this template" style=";;background:none transparent;border:none;">t</abbr></a></li>
+<li class="nv-edit"><a class="external text" href="//en.wikipedia.org/w/index.php?title=Template:Compression_methods&amp;action=edit"><abbr title="Edit this template" style=";;background:none transparent;border:none;">e</abbr></a></li>
+</ul>
+</div>
+<div id="Data_compression_methods" style="font-size:114%"><a href="/wiki/Data_compression" title="Data compression">Data compression</a> methods</div>
+</th>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group"><a href="/wiki/Lossless_compression" title="Lossless compression">Lossless</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:7.0em;font-weight:normal;"><a href="/wiki/Entropy_encoding" title="Entropy encoding">Entropy type</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Unary_coding" title="Unary coding">Unary</a></li>
+<li><a href="/wiki/Arithmetic_coding" title="Arithmetic coding">Arithmetic</a></li>
+<li><a href="/wiki/Asymmetric_Numeral_Systems" title="Asymmetric Numeral Systems">Asymmetric Numeral Systems</a></li>
+<li><a href="/wiki/Golomb_coding" title="Golomb coding">Golomb</a></li>
+<li><a href="/wiki/Huffman_coding" title="Huffman coding">Huffman</a>
+<ul>
+<li><a href="/wiki/Adaptive_Huffman_coding" title="Adaptive Huffman coding">Adaptive</a></li>
+<li><a href="/wiki/Canonical_Huffman_code" title="Canonical Huffman code">Canonical</a></li>
+<li><a href="/wiki/Modified_Huffman_coding" title="Modified Huffman coding">Modified</a></li>
+</ul>
+</li>
+<li><a href="/wiki/Range_encoding" title="Range encoding">Range</a></li>
+<li><a href="/wiki/Shannon_coding" title="Shannon coding">Shannon</a></li>
+<li><a href="/wiki/Shannon%E2%80%93Fano_coding" title="Shannon–Fano coding">Shannon–Fano</a></li>
+<li><a href="/wiki/Shannon%E2%80%93Fano%E2%80%93Elias_coding" title="Shannon–Fano–Elias coding">Shannon–Fano–Elias</a></li>
+<li><a href="/wiki/Tunstall_coding" title="Tunstall coding">Tunstall</a></li>
+<li><a href="/wiki/Universal_code_(data_compression)" title="Universal code (data compression)">Universal</a>
+<ul>
+<li><a href="/wiki/Exponential-Golomb_coding" title="Exponential-Golomb coding">Exp-Golomb</a></li>
+<li><a href="/wiki/Fibonacci_coding" title="Fibonacci coding">Fibonacci</a></li>
+<li><a href="/wiki/Elias_gamma_coding" title="Elias gamma coding">Gamma</a></li>
+<li><a href="/wiki/Levenshtein_coding" title="Levenshtein coding">Levenshtein</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:7.0em;font-weight:normal;"><a href="/wiki/Dictionary_coder" title="Dictionary coder">Dictionary type</a></th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Byte_pair_encoding" title="Byte pair encoding">Byte pair encoding</a></li>
+<li><a href="/wiki/DEFLATE" title="DEFLATE">DEFLATE</a></li>
+<li><a href="/wiki/Snappy_(compression)" title="Snappy (compression)">Snappy</a></li>
+<li><a href="/wiki/LZ77_and_LZ78" title="LZ77 and LZ78">Lempel–Ziv</a>
+<ul>
+<li><a href="/wiki/LZ77_and_LZ78" title="LZ77 and LZ78">LZ77&#160;/ LZ78 (LZ1&#160;/ LZ2)</a></li>
+<li><a href="/wiki/LZJB" title="LZJB">LZJB</a></li>
+<li><a href="/wiki/Lempel%E2%80%93Ziv%E2%80%93Markov_chain_algorithm" title="Lempel–Ziv–Markov chain algorithm">LZMA</a></li>
+<li><a href="/wiki/Lempel%E2%80%93Ziv%E2%80%93Oberhumer" title="Lempel–Ziv–Oberhumer">LZO</a></li>
+<li><a href="/wiki/LZRW" title="LZRW">LZRW</a></li>
+<li><a href="/wiki/Lempel%E2%80%93Ziv%E2%80%93Stac" title="Lempel–Ziv–Stac">LZS</a></li>
+<li><a href="/wiki/Lempel%E2%80%93Ziv%E2%80%93Storer%E2%80%93Szymanski" title="Lempel–Ziv–Storer–Szymanski">LZSS</a></li>
+<li><a href="/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch" title="Lempel–Ziv–Welch">LZW</a></li>
+<li><a href="/wiki/LZWL" title="LZWL">LZWL</a></li>
+<li><a href="/wiki/LZX_(algorithm)" title="LZX (algorithm)">LZX</a></li>
+<li><a href="/wiki/LZ4_(compression_algorithm)" title="LZ4 (compression algorithm)">LZ4</a></li>
+<li><a href="/wiki/Brotli" title="Brotli">Brotli</a></li>
+<li><a href="/wiki/Statistical_Lempel%E2%80%93Ziv" title="Statistical Lempel–Ziv">Statistical</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:7.0em;font-weight:normal;">Other types</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Burrows%E2%80%93Wheeler_transform" title="Burrows–Wheeler transform">BWT</a></li>
+<li><a href="/wiki/Context_tree_weighting" title="Context tree weighting">CTW</a></li>
+<li><a href="/wiki/Delta_encoding" title="Delta encoding">Delta</a></li>
+<li><a href="/wiki/Dynamic_Markov_compression" title="Dynamic Markov compression">DMC</a></li>
+<li><a href="/wiki/Move-to-front_transform" title="Move-to-front transform">MTF</a></li>
+<li><a href="/wiki/PAQ" title="PAQ">PAQ</a></li>
+<li><a href="/wiki/Prediction_by_partial_matching" title="Prediction by partial matching">PPM</a></li>
+<li><a href="/wiki/Run-length_encoding" title="Run-length encoding">RLE</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group"><a href="/wiki/Audio_compression_(data)" class="mw-redirect" title="Audio compression (data)">Audio</a></th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:7.0em;font-weight:normal;">Concepts</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Bit_rate" title="Bit rate">Bit rate</a>
+<ul>
+<li><a href="/wiki/Average_bitrate" title="Average bitrate">average (ABR)</a></li>
+<li><a href="/wiki/Constant_bitrate" title="Constant bitrate">constant (CBR)</a></li>
+<li><a href="/wiki/Variable_bitrate" title="Variable bitrate">variable (VBR)</a></li>
+</ul>
+</li>
+<li><a href="/wiki/Companding" title="Companding">Companding</a></li>
+<li><a href="/wiki/Convolution" title="Convolution">Convolution</a></li>
+<li><a href="/wiki/Dynamic_range" title="Dynamic range">Dynamic range</a></li>
+<li><a href="/wiki/Latency_(audio)" title="Latency (audio)">Latency</a></li>
+<li><a href="/wiki/Nyquist%E2%80%93Shannon_sampling_theorem" title="Nyquist–Shannon sampling theorem">Nyquist–Shannon theorem</a></li>
+<li><a href="/wiki/Sampling_(signal_processing)" title="Sampling (signal processing)">Sampling</a></li>
+<li><a href="/wiki/Sound_quality" title="Sound quality">Sound quality</a></li>
+<li><a href="/wiki/Speech_coding" title="Speech coding">Speech coding</a></li>
+<li><a href="/wiki/Sub-band_coding" title="Sub-band coding">Sub-band coding</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:7.0em;font-weight:normal;"><a href="/wiki/Audio_codec" title="Audio codec">Codec</a> parts</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/A-law_algorithm" title="A-law algorithm">A-law</a></li>
+<li><a href="/wiki/%CE%9C-law_algorithm" title="Μ-law algorithm">μ-law</a></li>
+<li><a href="/wiki/Algebraic_code-excited_linear_prediction" title="Algebraic code-excited linear prediction">ACELP</a></li>
+<li><a href="/wiki/Adaptive_differential_pulse-code_modulation" title="Adaptive differential pulse-code modulation">ADPCM</a></li>
+<li><a href="/wiki/Code-excited_linear_prediction" title="Code-excited linear prediction">CELP</a></li>
+<li><a href="/wiki/Differential_pulse-code_modulation" title="Differential pulse-code modulation">DPCM</a></li>
+<li><a href="/wiki/Fourier_transform" title="Fourier transform">Fourier transform</a></li>
+<li><a href="/wiki/Linear_predictive_coding" title="Linear predictive coding">LPC</a>
+<ul>
+<li><a href="/wiki/Log_area_ratio" title="Log area ratio">LAR</a></li>
+<li><a href="/wiki/Line_spectral_pairs" title="Line spectral pairs">LSP</a></li>
+</ul>
+</li>
+<li><a href="/wiki/Modified_discrete_cosine_transform" title="Modified discrete cosine transform">MDCT</a></li>
+<li><a href="/wiki/Psychoacoustics" title="Psychoacoustics">Psychoacoustic model</a></li>
+<li><a href="/wiki/Warped_linear_predictive_coding" title="Warped linear predictive coding">WLPC</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group"><a href="/wiki/Image_compression" title="Image compression">Image</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:7.0em;font-weight:normal;">Concepts</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Chroma_subsampling" title="Chroma subsampling">Chroma subsampling</a></li>
+<li><a href="/wiki/Coding_tree_unit" title="Coding tree unit">Coding tree unit</a></li>
+<li><a href="/wiki/Color_space" title="Color space">Color space</a></li>
+<li><a href="/wiki/Compression_artifact" title="Compression artifact">Compression artifact</a></li>
+<li><a href="/wiki/Image_resolution" title="Image resolution">Image resolution</a></li>
+<li><a href="/wiki/Macroblock" title="Macroblock">Macroblock</a></li>
+<li><a href="/wiki/Pixel" title="Pixel">Pixel</a></li>
+<li><a href="/wiki/Peak_signal-to-noise_ratio" title="Peak signal-to-noise ratio">PSNR</a></li>
+<li><a href="/wiki/Quantization_(image_processing)" title="Quantization (image processing)">Quantization</a></li>
+<li><a href="/wiki/Standard_test_image" title="Standard test image">Standard test image</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:7.0em;font-weight:normal;">Methods</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Chain_code" title="Chain code">Chain code</a></li>
+<li><a href="/wiki/Discrete_cosine_transform" title="Discrete cosine transform">DCT</a></li>
+<li><a href="/wiki/Embedded_Zerotrees_of_Wavelet_transforms" title="Embedded Zerotrees of Wavelet transforms">EZW</a></li>
+<li><a href="/wiki/Fractal_compression" title="Fractal compression">Fractal</a></li>
+<li><a href="/wiki/Karhunen%E2%80%93Lo%C3%A8ve_theorem" title="Karhunen–Loève theorem">KLT</a></li>
+<li><a href="/wiki/Pyramid_(image_processing)" title="Pyramid (image processing)">LP</a></li>
+<li><a href="/wiki/Run-length_encoding" title="Run-length encoding">RLE</a></li>
+<li><a href="/wiki/Set_partitioning_in_hierarchical_trees" title="Set partitioning in hierarchical trees">SPIHT</a></li>
+<li><a href="/wiki/Wavelet_compression" class="mw-redirect" title="Wavelet compression">Wavelet</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group"><a href="/wiki/Video_compression" class="mw-redirect" title="Video compression">Video</a></th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:7.0em;font-weight:normal;">Concepts</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Bit_rate" title="Bit rate">Bit rate</a>
+<ul>
+<li><a href="/wiki/Average_bitrate" title="Average bitrate">average (ABR)</a></li>
+<li><a href="/wiki/Constant_bitrate" title="Constant bitrate">constant (CBR)</a></li>
+<li><a href="/wiki/Variable_bitrate" title="Variable bitrate">variable (VBR)</a></li>
+</ul>
+</li>
+<li><a href="/wiki/Display_resolution" title="Display resolution">Display resolution</a></li>
+<li><a href="/wiki/Film_frame" title="Film frame">Frame</a></li>
+<li><a href="/wiki/Frame_rate" title="Frame rate">Frame rate</a></li>
+<li><a href="/wiki/Video_compression_picture_types" title="Video compression picture types">Frame types</a></li>
+<li><a href="/wiki/Interlaced_video" title="Interlaced video">Interlace</a></li>
+<li><a href="/wiki/Video#Characteristics_of_video_streams" title="Video">Video characteristics</a></li>
+<li><a href="/wiki/Video_quality" title="Video quality">Video quality</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:7.0em;font-weight:normal;"><a href="/wiki/Video_codec" title="Video codec">Codec</a> parts</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Lapped_transform" title="Lapped transform">Lapped transform</a></li>
+<li><a href="/wiki/Discrete_cosine_transform" title="Discrete cosine transform">DCT</a></li>
+<li><a href="/wiki/Deblocking_filter" title="Deblocking filter">Deblocking filter</a></li>
+<li><a href="/wiki/Motion_compensation" title="Motion compensation">Motion compensation</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group"><a href="/wiki/Information_theory" title="Information theory">Theory</a></th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Entropy_(information_theory)" title="Entropy (information theory)">Entropy</a></li>
+<li><a href="/wiki/Kolmogorov_complexity" title="Kolmogorov complexity">Kolmogorov complexity</a></li>
+<li><a href="/wiki/Lossy_compression" title="Lossy compression">Lossy</a></li>
+<li><a href="/wiki/Quantization_(signal_processing)" title="Quantization (signal processing)">Quantization</a></li>
+<li><a href="/wiki/Rate%E2%80%93distortion_theory" title="Rate–distortion theory">Rate–distortion</a></li>
+<li><a href="/wiki/Redundancy_(information_theory)" title="Redundancy (information theory)">Redundancy</a></li>
+<li><a href="/wiki/Timeline_of_information_theory" title="Timeline of information theory">Timeline of information theory</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<td class="navbox-abovebelow" colspan="2">
+<div>
+<ul>
+<li><img alt="Template" src="//upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png" title="Template" width="16" height="16" srcset="//upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/23px-Symbol_template_class.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/31px-Symbol_template_class.svg.png 2x" data-file-width="180" data-file-height="185" /> <a href="/wiki/Template:Compression_formats" title="Template:Compression formats">Compression formats</a></li>
+<li><img alt="Template" src="//upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/16px-Symbol_template_class.svg.png" title="Template" width="16" height="16" srcset="//upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/23px-Symbol_template_class.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/5/5c/Symbol_template_class.svg/31px-Symbol_template_class.svg.png 2x" data-file-width="180" data-file-height="185" /> <a href="/wiki/Template:Compression_software" title="Template:Compression software">Compression software (codecs)</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p><br /></p>
+<table class="metadata plainlinks stub" role="presentation" style="background:transparent">
+<tr>
+<td><a href="/wiki/File:Binary_tree.svg" class="image"><img alt="Stub icon" src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Binary_tree.svg/36px-Binary_tree.svg.png" width="36" height="30" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Binary_tree.svg/54px-Binary_tree.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Binary_tree.svg/72px-Binary_tree.svg.png 2x" data-file-width="300" data-file-height="250" /></a></td>
+<td><i>This <a href="/wiki/Algorithm" title="Algorithm">algorithms</a> or <a href="/wiki/Data_structure" title="Data structure">data structures</a>-related article is a <a href="/wiki/Wikipedia:Stub" title="Wikipedia:Stub">stub</a>. You can help Wikipedia by <a class="external text" href="//en.wikipedia.org/w/index.php?title=Zstandard&amp;action=edit">expanding it</a>.</i>
+<div class="plainlinks hlist navbar mini" style="position: absolute; right: 15px; display: none;">
+<ul>
+<li class="nv-view"><a href="/wiki/Template:Algorithm-stub" title="Template:Algorithm-stub"><abbr title="View this template">v</abbr></a></li>
+<li class="nv-talk"><a href="/wiki/Template_talk:Algorithm-stub" title="Template talk:Algorithm-stub"><abbr title="Discuss this template">t</abbr></a></li>
+<li class="nv-edit"><a class="external text" href="//en.wikipedia.org/w/index.php?title=Template:Algorithm-stub&amp;action=edit"><abbr title="Edit this template">e</abbr></a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+
+
+<!-- 
+NewPP limit report
+Parsed by mw1251
+Cached time: 20161209091217
+Cache expiry: 2592000
+Dynamic content: false
+CPU time usage: 0.180 seconds
+Real time usage: 0.253 seconds
+Preprocessor visited node count: 2102/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 86949/2097152 bytes
+Template argument size: 5342/2097152 bytes
+Highest expansion depth: 25/40
+Expensive parser function count: 5/500
+Lua time usage: 0.069/10.000 seconds
+Lua memory usage: 3.3 MB/50 MB
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  208.785      1 - -total
+ 48.08%  100.393      2 - Template:Infobox
+ 38.95%   81.332      1 - Template:Infobox_software
+ 23.16%   48.360      2 - Template:Expand_language
+ 21.50%   44.881      1 - Template:Expand_French
+ 15.64%   32.659      2 - Template:Ambox
+ 13.68%   28.569      1 - Template:Reflist
+ 12.99%   27.112      5 - Template:Navbox
+ 12.65%   26.420      1 - Template:Infobox_software/simple
+ 11.79%   24.609      1 - Template:Cite_news
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:51498967-0!*!0!!en!4!* and timestamp 20161209091217 and revision id 753453226
+ -->
+<noscript><img src="//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://en.wikipedia.org/w/index.php?title=Zstandard&amp;oldid=753453226">https://en.wikipedia.org/w/index.php?title=Zstandard&amp;oldid=753453226</a>"					</div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/wiki/Help:Category" title="Help:Category">Categories</a>: <ul><li><a href="/wiki/Category:Lossless_compression_algorithms" title="Category:Lossless compression algorithms">Lossless compression algorithms</a></li><li><a href="/wiki/Category:Free_data_compression_software" title="Category:Free data compression software">Free data compression software</a></li><li><a href="/wiki/Category:C_libraries" title="Category:C libraries">C libraries</a></li><li><a href="/wiki/Category:2016_software" title="Category:2016 software">2016 software</a></li><li><a href="/wiki/Category:Software_using_the_BSD_license" title="Category:Software using the BSD license">Software using the BSD license</a></li><li><a href="/wiki/Category:Algorithms_and_data_structures_stubs" title="Category:Algorithms and data structures stubs">Algorithms and data structures stubs</a></li><li><a href="/wiki/Category:Computer_science_stubs" title="Category:Computer science stubs">Computer science stubs</a></li></ul></div><div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul><li><a href="/wiki/Category:Pages_using_deprecated_image_syntax" title="Category:Pages using deprecated image syntax">Pages using deprecated image syntax</a></li><li><a href="/wiki/Category:Articles_to_be_expanded_from_September_2016" title="Category:Articles to be expanded from September 2016">Articles to be expanded from September 2016</a></li><li><a href="/wiki/Category:All_articles_to_be_expanded" title="Category:All articles to be expanded">All articles to be expanded</a></li><li><a href="/wiki/Category:Articles_needing_translation_from_French_Wikipedia" title="Category:Articles needing translation from French Wikipedia">Articles needing translation from French Wikipedia</a></li><li><a href="/wiki/Category:Articles_needing_translation_from_Russian_Wikipedia" title="Category:Articles needing translation from Russian Wikipedia">Articles needing translation from Russian Wikipedia</a></li><li><a href="/wiki/Category:All_stub_articles" title="Category:All stub articles">All stub articles</a></li></ul></div></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-anonuserpage">Not logged in</li><li id="pt-anontalk"><a href="/wiki/Special:MyTalk" title="Discussion about edits from this IP address [n]" accesskey="n">Talk</a></li><li id="pt-anoncontribs"><a href="/wiki/Special:MyContributions" title="A list of edits made from this IP address [y]" accesskey="y">Contributions</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Special:CreateAccount&amp;returnto=Zstandard" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a href="/w/index.php?title=Special:UserLogin&amp;returnto=Zstandard" title="You're encouraged to log in; however, it's not mandatory. [o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li  id="ca-nstab-main" class="selected"><span><a href="/wiki/Zstandard"  title="View the content page [c]" accesskey="c">Article</a></span></li>
+															<li  id="ca-talk"><span><a href="/wiki/Talk:Zstandard"  title="Discussion about the content page [t]" accesskey="t" rel="discussion">Talk</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variants</span><a href="#"></a>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="/wiki/Zstandard" >Read</a></span></li>
+															<li id="ca-edit"><span><a href="/w/index.php?title=Zstandard&amp;action=edit"  title="Edit this page [e]" accesskey="e">Edit</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="/w/index.php?title=Zstandard&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/w/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Search Wikipedia" title="Search Wikipedia [f]" accesskey="f" id="searchInput"/><input type="hidden" value="Special:Search" name="title"/><input type="submit" name="fulltext" value="Search" title="Search Wikipedia for this text" id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton"/>							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Main_Page"  title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="/wiki/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li><li id="n-contents"><a href="/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li><li id="n-featuredcontent"><a href="/wiki/Portal:Featured_content" title="Featured content – the best of Wikipedia">Featured content</a></li><li id="n-currentevents"><a href="/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li><li id="n-randompage"><a href="/wiki/Special:Random" title="Load a random article [x]" accesskey="x">Random article</a></li><li id="n-sitesupport"><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en" title="Support us">Donate to Wikipedia</a></li><li id="n-shoplink"><a href="//shop.wikimedia.org" title="Visit the Wikipedia store">Wikipedia store</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-interaction' aria-labelledby='p-interaction-label'>
+			<h3 id='p-interaction-label'>Interaction</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-help"><a href="/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li><li id="n-aboutsite"><a href="/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li><li id="n-portal"><a href="/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li><li id="n-recentchanges"><a href="/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li><li id="n-contactpage"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact page</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="/wiki/Special:WhatLinksHere/Zstandard" title="List of all English Wikipedia pages containing links to this page [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="/wiki/Special:RecentChangesLinked/Zstandard" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-upload"><a href="/wiki/Wikipedia:File_Upload_Wizard" title="Upload files [u]" accesskey="u">Upload file</a></li><li id="t-specialpages"><a href="/wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-permalink"><a href="/w/index.php?title=Zstandard&amp;oldid=753453226" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/w/index.php?title=Zstandard&amp;action=info" title="More information about this page">Page information</a></li><li id="t-wikibase"><a href="https://www.wikidata.org/wiki/Q26737171" title="Link to connected data repository item [g]" accesskey="g">Wikidata item</a></li><li id="t-cite"><a href="/w/index.php?title=Special:CiteThisPage&amp;page=Zstandard&amp;id=753453226" title="Information on how to cite this page">Cite this page</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-coll-print_export' aria-labelledby='p-coll-print_export-label'>
+			<h3 id='p-coll-print_export-label'>Print/export</h3>
+
+			<div class="body">
+									<ul>
+						<li id="coll-create_a_book"><a href="/w/index.php?title=Special:Book&amp;bookcmd=book_creator&amp;referer=Zstandard">Create a book</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=Special:Book&amp;bookcmd=render_article&amp;arttitle=Zstandard&amp;returnto=Zstandard&amp;oldid=753453226&amp;writer=rdf2latex">Download as PDF</a></li><li id="t-print"><a href="/w/index.php?title=Zstandard&amp;printable=yes" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-lang' aria-labelledby='p-lang-label'>
+			<h3 id='p-lang-label'>Languages</h3>
+
+			<div class="body">
+									<ul>
+						<li class="interlanguage-link interwiki-fr"><a href="https://fr.wikipedia.org/wiki/Zstandard" title="Zstandard – French" lang="fr" hreflang="fr" class="interlanguage-link-target">Français</a></li><li class="interlanguage-link interwiki-ru"><a href="https://ru.wikipedia.org/wiki/Zstandard" title="Zstandard – Russian" lang="ru" hreflang="ru" class="interlanguage-link-target">Русский</a></li><li class="uls-p-lang-dummy"><a href="#"></a></li>					</ul>
+				<div class='after-portlet after-portlet-lang'><span class="wb-langlinks-edit wb-langlinks-link"><a href="https://www.wikidata.org/wiki/Q26737171#sitelinks-wikipedia" title="Edit interlanguage links" class="wbc-editpage">Edit links</a></span></div>			</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 7 December 2016, at 06:46.</li>
+											<li id="footer-info-copyright">Text is available under the <a rel="license" href="//en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License">Creative Commons Attribution-ShareAlike License</a><a rel="license" href="//creativecommons.org/licenses/by-sa/3.0/" style="display:none;"></a>;
+additional terms may apply.  By using this site, you agree to the <a href="//wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> and <a href="//wikimediafoundation.org/wiki/Privacy_policy">Privacy Policy</a>. Wikipedia® is a registered trademark of the <a href="//www.wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>, a non-profit organization.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="https://wikimediafoundation.org/wiki/Privacy_policy" class="extiw" title="wmf:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+											<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+											<li id="footer-places-contact"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact Wikipedia</a></li>
+											<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Developers</a></li>
+											<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Cookie statement</a></li>
+											<li id="footer-places-mobileview"><a href="//en.m.wikipedia.org/w/index.php?title=Zstandard&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Mobile view</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="https://wikimediafoundation.org/"><img src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"/></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="//www.mediawiki.org/"><img src="/static/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":56,"wgHostname":"mw1248"});});</script>
+	</body>
+</html>

@@ -65,7 +65,7 @@ module Zstandard
     end
 
     def self.simple_compress(string, options = {})
-      level = options[:level] || 1
+      level = options[:level] || 0 # 0 means default
 
       dst_size = FFIBindings.zstd_compress_bound(string.bytesize)
       dst = FFI::MemoryPointer.new(:char, dst_size)

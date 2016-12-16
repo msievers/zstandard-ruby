@@ -7,8 +7,8 @@ group :development do
   gem "benchmark-ips"
   gem "bundler"
   gem "rake"
-  gem "rubocop", "~> 0.41", require: false
-  gem "rspec",   "~> 3.0"
+  gem "ruby-progressbar", "~> 1.0"
+  gem "rspec", "~> 3.0"
   gem "simplecov"
 
   if !ENV["CI"] && RUBY_ENGINE == "ruby"

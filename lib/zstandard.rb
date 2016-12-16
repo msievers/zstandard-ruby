@@ -7,7 +7,7 @@ module Zstandard
   class DecompressedSizeUnknownError < Error; end;
   class LibraryVersionNotSupportedError < Error; end;
 
-  def self.deflate(string, level = 1)
+  def self.deflate(string, level = nil)
     API.simple_compress(string, level: level)
   end
 
