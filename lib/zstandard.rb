@@ -1,4 +1,5 @@
 require_relative "./zstandard/api"
+require_relative "./zstandard/mri"
 require_relative "./zstandard/parameters"
 require_relative "./zstandard/version"
 
