@@ -68,12 +68,25 @@ module Zstandard
       level = options[:level] || 0 # 0 means default
 
       dst_size = FFIBindings.zstd_compress_bound(string.bytesize)
-      dst = FFI::MemoryPointer.new(:char, dst_size)
+
+      dst =
+      if true # MRI
+        dst = " " * (MRI::RSTRING_EMBED_LEN_MAX + 1)
+        MRI::rb_str_resize(FFI::Pointer.new(dst.object_id << 1), dst_size)
+        dst
+      else
+        FFI::MemoryPointer.new(:char, dst_size)
+      end
 
       error_code = number_of_bytes = FFIBindings.zstd_compress(dst, dst_size, string, string.bytesize, level)
 
       if FFIBindings.zstd_is_error(error_code) >= 0
-        dst.read_bytes(number_of_bytes)
+        if true
+          MRI::rb_str_resize(FFI::Pointer.new(dst.object_id << 1), number_of_bytes)
+          dst
+        else
+          dst.read_bytes(number_of_bytes)
+        end
       else
         raise "error"
       end

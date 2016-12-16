@@ -3,6 +3,9 @@ require "ffi"
 module Zstandard
   module MRI
     extend FFI::Library
+    ffi_lib [FFI::CURRENT_PROCESS, "ruby"]
+
+    attach_function :rb_str_resize, :rb_str_resize, [:pointer, :long], :pointer
 
     def self.sizeof(type)
       Class.new(FFI::Struct) do
