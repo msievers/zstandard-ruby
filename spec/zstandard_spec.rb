@@ -1,45 +1,28 @@
-require "benchmark/ips"
-
 describe Zstandard do
   puts "\nffi_libs #{Zstandard::FFIBindings.instance_variable_get(:@ffi_libs).map(&:name)}"
 
-  describe ".deflate" do
-    it "does something useful" do
-      string = SecureRandom.hex(1024*1024*16)
+  def random_string(length)
+    # Needs to be truncated because the length of the result of base64 is about 4/3 of length
+    SecureRandom.base64(length)[0..(length - 1)]
+  end
 
-      compressed = Zstandard.deflate(string)
-      decompressed = Zstandard.inflate(compressed)
+  specify ".deflate" do
+    string = random_string(1024)
+    compressed_string = Zstandard.deflate(string)
+    expect(Zstandard.inflate(compressed_string)).to eq(string)
+  end
 
-      expect(decompressed).to eq(string)
+  describe ".inflate" do
+    specify "if decompressed size is <= MAX_SIMPLE_DECOMPRESS_SIZE" do
+      string = random_string(Zstandard::Parameters::MAX_SIMPLE_DECOMPRESS_SIZE)
+      compressed_string = Zstandard.deflate(string)
+      expect(Zstandard.inflate(compressed_string)).to eq(string)
     end
-=begin
-    it "benchmarks" do
-      string = SecureRandom.hex(1024*1024*4)
-      zlib_compressed_data = Zlib.deflate(string)
-      zstd_compressed_data = Zstandard.deflate(string)
 
-      puts "Input sample (first 1000 chars of #{string.length}) SecureRandom.hex"
-      puts " "
-      puts string[0..1000]
-      puts " "
-      puts "uncompress: #{string.bytesize} bytes"
-      puts "zlib:       #{zlib_compressed_data.bytesize} bytes"
-      puts "zstd:       #{zstd_compressed_data.bytesize} bytes"
-      puts " "
-
-      Benchmark.ips do |x|
-        # Configure the number of seconds used during
-        # the warmup phase (default 2) and calculation phase (default 5)
-        x.config(:time => 5, :warmup => 2)
-
-        # Typical mode, runs the block as many times as it can
-        x.report("zlib") { Zlib.inflate(zlib_compressed_data) }
-        x.report("zstd") { Zstandard.inflate(zstd_compressed_data) }
-
-        # Compare the iterations per second of the various reports!
-        x.compare!
-      end
+    specify "if decompressed size is > MAX_SIMPLE_DECOMPRESS_SIZE" do
+      string = random_string(Zstandard::Parameters::MAX_SIMPLE_DECOMPRESS_SIZE + 1)
+      compressed_string = Zstandard.deflate(string)
+      expect(Zstandard.inflate(compressed_string)).to eq(string)
     end
-=end
   end
 end
