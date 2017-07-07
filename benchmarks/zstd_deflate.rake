@@ -1,5 +1,6 @@
 require "benchmark/ips"
 require "ruby-progressbar"
+require "securerandom"
 require "zlib"
 require_relative "../lib/zstandard"
 
