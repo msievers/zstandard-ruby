@@ -70,6 +70,14 @@ module Zstandard
     #   @return [size_t]
     attach_function :zstd_decompress_continue, :ZSTD_decompressContinue, [:pointer, :pointer, :size_t, :pointer, :size_t], :size_t
 
+    # @!method self.zstd_find_decompressed_size
+    #   @param [const void*] src
+    #   @param [size_t] srcSize
+    #   @return [unsigned long long]
+    if zstd_version_number >= 10104
+      attach_function :zstd_find_decompressed_size, :ZSTD_findDecompressedSize, [:pointer, :size_t], :uint64
+    end
+
     # @!method self.zstd_free_dctx(dctx)
     #   @param [ZSTD_DCtx*] dctx
     #   @return [size_t]
@@ -81,7 +89,11 @@ module Zstandard
     #   @param [size_t] srcSize
     #   @return [size_t]
     # size_t ZSTD_getFrameParams(ZSTD_frameParams* fparamsPtr, const void* src, size_t srcSize)
-    attach_function :zstd_get_frame_params, :ZSTD_getFrameParams, [:pointer, :pointer, :size_t], :size_t
+    if zstd_version_number < 10300
+      attach_function :zstd_get_frame_params, :ZSTD_getFrameParams, [:pointer, :pointer, :size_t], :size_t
+    else
+      attach_function :zstd_get_frame_header, :ZSTD_getFrameHeader, [:pointer, :pointer, :size_t], :size_t
+    end
 
     # @!method zstd_next_src_size_to_deompress(dctx)
     #   @param [ZSTD_DCtx*] dctx
@@ -139,27 +151,38 @@ module Zstandard
     #   unsigned checksumFlag;
     # } ZSTD_frameParams;
     # ```
-    class ZSTD_frameParams < FFI::Struct
-      # @!method [](member)
-      if Zstandard::FFIBindings.zstd_version_number < 700
-        # `<= v0.6.x`
-        # @overload [](member)
-        #   @param [:frameContentSize, :windowLog] member
-        layout(
-          frameContentSize: :uint64,
-          windowLog:        :uint32
-        )
-      elsif Zstandard::FFIBindings.zstd_version_number < 800
-        # `>= v0.7.x`
-        # @overload [](member)
-        #   @param [:frameContentSize, :windowSize, :dictID, :checksumFlag] member
-        layout(
-          :frameContentSize, :uint64,
-          :windowSize,       :uint32,
-          :dictID,           :uint32,
-          :checksumFlag,     :uint32
-        )
-      else
+    if Zstandard::FFIBindings.zstd_version_number < 10300
+      class ZSTD_frameParams < FFI::Struct
+        # @!method [](member)
+        if Zstandard::FFIBindings.zstd_version_number < 700
+          # `<= v0.6.x`
+          # @overload [](member)
+          #   @param [:frameContentSize, :windowLog] member
+          layout(
+            frameContentSize: :uint64,
+            windowLog:        :uint32
+          )
+        elsif Zstandard::FFIBindings.zstd_version_number < 800
+          # `>= v0.7.x`
+          # @overload [](member)
+          #   @param [:frameContentSize, :windowSize, :dictID, :checksumFlag] member
+          layout(
+            :frameContentSize, :uint64,
+            :windowSize,       :uint32,
+            :dictID,           :uint32,
+            :checksumFlag,     :uint32
+          )
+        else
+          layout(
+            :frameContentSize, :ulong_long,
+            :windowSize,       :uint,
+            :dictID,           :uint,
+            :checksumFlag,     :uint
+          )
+        end
+      end
+    else
+      class ZSTD_frameHeader < FFI::Struct
         layout(
           :frameContentSize, :ulong_long,
           :windowSize,       :uint,

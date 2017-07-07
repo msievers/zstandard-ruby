@@ -58,10 +58,12 @@ module Zstandard
         parameters = FFIBindings::ZSTD_parameters.new
         FFIBindings.zstd_get_frame_params(parameters, string, string.bytesize)
         parameters[:srcSize]
-      else
+      elsif FFIBindings.zstd_version_number < 10104
         frame_params = FFIBindings::ZSTD_frameParams.new
         FFIBindings.zstd_get_frame_params(frame_params, string, string.bytesize)
         frame_params[:frameContentSize]
+      else
+        FFIBindings.zstd_find_decompressed_size(string, string.bytesize)
       end
     end
 
@@ -107,10 +109,14 @@ module Zstandard
         frame_params = FFIBindings::ZSTD_frameParams.new
         FFIBindings.zstd_get_frame_params(frame_params, string, string.bytesize)
         2 ** frame_params[:windowLog]
-      else
+      elsif Zstandard::FFIBindings.zstd_version_number < 10300
         frame_params = FFIBindings::ZSTD_frameParams.new
         FFIBindings.zstd_get_frame_params(frame_params, string, string.bytesize)
         frame_params[:windowSize]
+      else
+        frame_header = FFIBindings::ZSTD_frameHeader.new
+        FFIBindings.zstd_get_frame_header(frame_header, string, string.bytesize)
+        frame_header[:windowSize]
       end
     end
   end
