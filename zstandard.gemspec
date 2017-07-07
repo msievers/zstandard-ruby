@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Michael Sievers"]
   spec.email         = ["michael_sievers@web.de"]
   spec.summary       = %q{Zstandard compression library bindings}
-  spec.homepage      = "https://github.com/msievers/zstandard"
+  spec.homepage      = "https://github.com/msievers/zstandard-ruby"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
