@@ -84,7 +84,7 @@ This gem can be configured by setting various environment variables. Please be c
 If you have `libzstd` installed in some unusual location or if you want to explictly tell, which library to use, you can set `ZSTANDARD_LIBRARY` to the path of the library you want to use. This can be handy for example if you have the latest version compiled in `/usr/local/lib`, but your system has an old version in `/usr/lib`.
 
 ```
-ZSTANDARD_LIBRARY=/usr/local/lib/libzstd.so bundle exec rake rspec
+ZSTANDARD_LIBRARY=/usr/local/lib/libzstd.so bundle exec rspec
 ```
 
 ### `ZSTANDARD_MAX_SIMPLE_DECOMPRESS_SIZE`
