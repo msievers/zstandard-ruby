@@ -8,7 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Zstandard::VERSION
   spec.authors       = ["Michael Sievers"]
   spec.email         = ["michael_sievers@web.de"]
-  spec.summary       = %q{Zstandard compression library bindings}
+  spec.summary       = %q{zstd (Zstandard) compression library bindings}
+  spec.description   = %q{This gem provides FFI based Ruby bindings for the zstd (Zstandard) compression library libzstd.}
   spec.homepage      = "https://github.com/msievers/zstandard-ruby"
   spec.license       = "MIT"
 
