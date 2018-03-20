@@ -11,7 +11,7 @@
 * [Contributing](#contributing)
 * [License](#license)
 
-This gem implements FFI based bindings to the [Zstandard](https://facebook.github.io/zstd) compression library `libzstd`. The [Zstandard](https://facebook.github.io/zstd) compression algorithm shines because it compresses data with the same or better ratio as *Zlib* but does this (much) faster, depending on the input. For the majority of cases it's **faster and better** then *Zlib*.
+This gem implements FFI based bindings to the [Zstandard](https://facebook.github.io/zstd) compression library `libzstd`. The [Zstandard](https://facebook.github.io/zstd) compression algorithm shines because it compresses data with the same or better ratio as *Zlib* but does this (much) faster, depending on the input. For the majority of cases it's **faster and better** then *Zlib*. It is tested to work with MRI from 1.9.3 to 2.5.x and with JRuby from >= 1.7.24, including 9.1.x.
 
 It **does not** ship the actual `libzstd` library but expects some version to be present on your system.
 
